@@ -13,26 +13,25 @@ import static java.util.Collections.sort;
 
 public class HomePresenter implements DataCallback<City> {
 
-    private final WeatherRepository matchRepository;
+    private final WeatherRepository weatherRepository;
 
     private List<City> results;
-
     private HomeView homeView;
 
     public HomePresenter(WeatherRepository weatherRepository) {
-        this.matchRepository = weatherRepository;
+        this.weatherRepository = weatherRepository;
         this.results = new ArrayList<>();
     }
 
     public void init(HomeView homeView) {
         this.homeView = homeView;
 
-        matchRepository.weatherForCities(initialiseCityNameList(), this);
+        weatherRepository.weatherForCities(initialiseCityNameList(), this);
     }
 
     public void refresh() {
         results = new ArrayList<>();
-        matchRepository.weatherForCities(initialiseCityNameList(), this);
+        weatherRepository.weatherForCities(initialiseCityNameList(), this);
     }
 
     @Override
