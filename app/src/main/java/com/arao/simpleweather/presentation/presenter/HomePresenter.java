@@ -9,10 +9,12 @@ import com.arao.simpleweather.presentation.view.HomeView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.sort;
+
 public class HomePresenter implements DataCallback<City> {
 
     private final WeatherRepository matchRepository;
-    private List<String> cityNames;
+
     private List<City> results;
 
     private HomeView homeView;
@@ -25,13 +27,13 @@ public class HomePresenter implements DataCallback<City> {
     public void init(HomeView homeView) {
         this.homeView = homeView;
 
-        initialiseCityNameList();
-        matchRepository.weatherForCities(cityNames, this);
+        matchRepository.weatherForCities(initialiseCityNameList(), this);
     }
 
     @Override
     public void onSuccess(City result) {
         results.add(result);
+        sort(results);
         homeView.displayWeatherForCities(results);
     }
 
@@ -44,18 +46,20 @@ public class HomePresenter implements DataCallback<City> {
         homeView.displayWeatherForCities(results);
     }
 
-    private void initialiseCityNameList() {
-        cityNames = new ArrayList<>();
+    private List<String> initialiseCityNameList() {
+        List<String> cityNames = new ArrayList<>();
         cityNames.add("London");
-        cityNames.add("Madrid");
+        cityNames.add("Nairobi");
         cityNames.add("Barcelona");
         cityNames.add("Paris");
-        cityNames.add("New York");
-        cityNames.add("Pekin");
-        cityNames.add("Madrid");
-        cityNames.add("Barcelona");
-        cityNames.add("Paris");
-        cityNames.add("New York");
+        cityNames.add("Lima");
+        cityNames.add("Beijing");
+        cityNames.add("Moscow");
+        cityNames.add("Melbourne");
+        cityNames.add("Athens");
+        cityNames.add("Montreal");
+
+        return cityNames;
     }
 
 }

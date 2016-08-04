@@ -3,7 +3,7 @@ package com.arao.simpleweather.data.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class City {
+public class City implements Comparable<City> {
 
     private List<Weather> weather = new ArrayList<>();
     private int id;
@@ -23,6 +23,11 @@ public class City {
 
     public List<Weather> getWeather() {
         return weather;
+    }
+
+    @Override
+    public int compareTo(City city) {
+        return name.compareTo(city.name);
     }
 
     public static final class Builder {

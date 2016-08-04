@@ -4,5 +4,9 @@
     <dimen name="small">8dp</dimen>
     <dimen name="medium">16dp</dimen>
     <dimen name="large">24dp</dimen>
+    <dimen name="icon_size">48dp</dimen>
+
+    <dimen name="city_name_font">16sp</dimen>
+    <dimen name="weather_description_font">14sp</dimen>
 
 </resources>
