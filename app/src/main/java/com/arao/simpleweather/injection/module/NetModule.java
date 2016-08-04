@@ -5,20 +5,27 @@ import com.arao.simpleweather.injection.scope.PerApplication;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class NetModule {
 
-    private static final String WHATS_THE_SCORE_API_BASE_URL = "http://api.whatsthescore.com/api/test/";
+    private static final String OPEN_WEATHER_MAP_API_BASE_URL = "http://api.openweathermap.org/data/2.5/";
 
     @Provides
     @PerApplication
     Retrofit retrofit() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
         return new Retrofit.Builder()
-                .baseUrl(WHATS_THE_SCORE_API_BASE_URL)
+                .baseUrl(OPEN_WEATHER_MAP_API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
                 .build();
     }
 
@@ -32,5 +39,6 @@ public class NetModule {
     CallbackConverterFactory callbackConverterFactory() {
         return new CallbackConverterFactory();
     }
+
 
 }

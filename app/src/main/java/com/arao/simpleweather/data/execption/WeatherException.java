@@ -8,4 +8,7 @@ public class WeatherException extends Exception {
         this.city = city;
     }
 
+    public String getCity() {
+        return city;
+    }
 }

@@ -12,13 +12,13 @@ import javax.inject.Inject;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 
-public class ApiMatchRepository implements WeatherRepository {
+public class ApiWeatherRepository implements WeatherRepository {
 
     private final Retrofit retrofit;
     private final CallbackConverterFactory callbackConverterFactory;
 
     @Inject
-    ApiMatchRepository(Retrofit retrofit, CallbackConverterFactory callbackConverterFactory) {
+    ApiWeatherRepository(Retrofit retrofit, CallbackConverterFactory callbackConverterFactory) {
         this.retrofit = retrofit;
         this.callbackConverterFactory = callbackConverterFactory;
     }
