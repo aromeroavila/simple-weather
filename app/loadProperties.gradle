@@ -1,0 +1,5 @@
+def prop = project.properties + System.properties
+
+ext.openweathermap = [
+        apiKey: "\"" + prop["openweathermap.apiKey"] + "\""
+]
