@@ -1,8 +1,8 @@
 package com.arao.simpleweather.presentation.view.activity;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -24,12 +24,14 @@ import butterknife.ButterKnife;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class HomeActivity extends AppCompatActivity implements HomeView {
+public class HomeActivity extends AppCompatActivity implements HomeView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.loading_layout)
     LinearLayout loadingLayout;
     @BindView(R.id.city_weather_list)
     ListView weatherList;
+    @BindView(R.id.swipe_container)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Inject
     HomePresenter homePresenter;
@@ -45,6 +47,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
 
         resolveDependencies();
 
+        swipeRefreshLayout.setOnRefreshListener(this);
         weatherList.setAdapter(cityWeatherAdapter);
         homePresenter.init(this);
     }
@@ -67,5 +70,13 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         if (loadingLayout.getVisibility() == VISIBLE) {
             loadingLayout.setVisibility(GONE);
         }
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        homePresenter.refresh();
     }
 }

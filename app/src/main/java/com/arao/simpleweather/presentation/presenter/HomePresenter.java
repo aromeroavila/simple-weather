@@ -30,6 +30,11 @@ public class HomePresenter implements DataCallback<City> {
         matchRepository.weatherForCities(initialiseCityNameList(), this);
     }
 
+    public void refresh() {
+        results = new ArrayList<>();
+        matchRepository.weatherForCities(initialiseCityNameList(), this);
+    }
+
     @Override
     public void onSuccess(City result) {
         results.add(result);
