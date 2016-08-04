@@ -37,7 +37,9 @@ public class HomePresenter implements DataCallback<City> {
     @Override
     public void onSuccess(City result) {
         results.add(result);
-        sort(results);
+        if (results.size() > 1) {
+            sort(results);
+        }
         homeView.displayWeatherForCities(results);
     }
 

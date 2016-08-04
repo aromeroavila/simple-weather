@@ -27,6 +27,9 @@ public class City implements Comparable<City> {
 
     @Override
     public int compareTo(City city) {
+        if (city == null || name == null || city.name == null) {
+            return 1;
+        }
         return name.compareTo(city.name);
     }
 
